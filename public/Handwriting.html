@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Handwriting</title>
+    <script src="Handwriting.js"></script>
+</head>
+<body>
+<script>
+    console.info('shallowReactive')
+
+    const shallowPerson = shallowReactive({
+        name: 'blingbling',
+        age: 26,
+        wife: {
+            name: 'nobody',
+            age: 'unknown'
+        }
+    })
+
+    shallowPerson.name += '+'
+    shallowPerson.wife.name += '+'
+
+    console.info('reactive')
+
+    const person = reactive({
+        name: 'blingbling',
+        age: 26,
+        wife: {
+            name: 'nobody',
+            age: 'unknown'
+        }
+    })
+
+    person.wife.name += '+'
+    console.debug('shallowPerson isReactive: ', isReactive(shallowPerson))
+    console.debug('person isReactive: ', isReactive(person))
+
+    console.info('shallowReadonly')
+
+    const sReadonlyPerson = shallowReadonly({
+        name: 'blingbling',
+        age: 26,
+        wife: {
+            name: 'nobody',
+            age: 'unknown'
+        }
+    })
+
+    sReadonlyPerson.name += '+'
+    sReadonlyPerson.wife.name += '+'
+
+    console.info('readonly')
+
+    const readonlyPerson = readonly({
+        name: 'blingbling',
+        age: 26,
+        wife: {
+            name: 'nobody',
+            age: 'unknown'
+        }
+    })
+
+    readonlyPerson.wife.name += '+'
+    console.debug('sReadonlyPerson isReadonly: ', isReadonly(sReadonlyPerson))
+    console.debug('readonlyPerson isReadonly: ', isReadonly(readonlyPerson))
+
+    console.info('shallowRef')
+
+    const sRefPerson = shallowRef({
+        name: 'blingbling',
+        age: 26,
+        wife: {
+            name: 'nobody',
+            age: 'unknown'
+        }
+    })
+
+    sRefPerson.value.name += '+'
+    sRefPerson.value = '+'
+
+    console.info('ref')
+
+    const refPerson = ref({
+        name: 'blingbling',
+        age: 26,
+        wife: {
+            name: 'nobody',
+            age: 'unknown'
+        }
+    })
+
+    refPerson.value.name += '+'
+    console.debug('sRefPerson isRef: ', isRef(sRefPerson))
+    console.debug('refPerson isRef: ', isRef(refPerson))
+</script>
+</body>
+</html>

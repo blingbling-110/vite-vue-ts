@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>代理与反射</title>
+</head>
+<body>
+<script>
+    const target = {
+            name: 'blingbling',
+            age: 26,
+            wife: {
+                name: 'nobody',
+                age: 'unknown'
+            }
+        },
+        proxy = new Proxy(target, {
+            get(target, p, receiver) {
+                console.log('调用了get()', target, p, receiver)
+                return Reflect.get(target, p, receiver)
+            },
+            set(target, p, value, receiver) {
+                console.log('调用了set()', target, p, value, receiver)
+                return Reflect.set(target, p, value, receiver)
+            },
+            defineProperty(target, p, attributes) {
+                console.log('调用了defineProperty()', target, p, attributes)
+                return Reflect.defineProperty(target, p, attributes)
+            },
+            deleteProperty(target, p) {
+                console.log('调用了deleteProperty()', target, p)
+                return Reflect.deleteProperty(target, p)
+            }
+        })
+
+    console.log(proxy.name)
+    proxy.name = 'blingbling_110'
+    proxy.gender = '女'
+    delete proxy.age
+    proxy.wife.name = 'who'
+    console.log(target)
+</script>
+</body>
+</html>
